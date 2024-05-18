@@ -3,8 +3,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import 'react-native-gesture-handler';
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { getDatabase } from "firebase/database";
 import 'firebase/database';
 
 
@@ -37,46 +35,23 @@ import ShoulderExercise3Screen from './screens/ShoulderExercise3Screen';
 
 const Stack = createStackNavigator();
 
-// const firebaseConfig = {
-//   apiKey: "AIzaSyDUy3erGoFd2Sdj-wusnc9ExkFea99CNL8",
-//   authDomain: "postureguard.firebaseapp.com",
-//   databaseURL: "https://postureguard-default-rtdb.firebaseio.com",
-//   projectId: "postureguard",
-//   storageBucket: "postureguard.appspot.com",
-//   messagingSenderId: "121148095939",
-//   appId: "1:121148095939:web:5d6d31d0a6ec2256371176",
-//   measurementId: "G-6CZDZZ7CCN"
-// };
+const firebaseConfig = {
+  apiKey: "AIzaSyDUy3erGoFd2Sdj-wusnc9ExkFea99CNL8",
+  authDomain: "postureguard.firebaseapp.com",
+  databaseURL: "https://postureguard-default-rtdb.firebaseio.com",
+  projectId: "postureguard",
+  storageBucket: "postureguard.appspot.com",
+  messagingSenderId: "121148095939",
+  appId: "1:121148095939:web:5d6d31d0a6ec2256371176",
+  measurementId: "G-6CZDZZ7CCN"
+};
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);
-// // Initialize Realtime Database and get a reference to the service
-// const database = getDatabase(app);
+
 
 const App = () => {
 
-
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-
-
-  // useEffect(() => {
-  //   if (!initializeApp?.apps?.length) {
-  //     initializeApp(firebaseConfig);
-  //   }
-  // }, []);
-
-
-  // const handleSignup = async () => {
-  //   try {
-  //     const auth = getAuth();
-  //     await createUserWithEmailAndPassword(auth, email, password);
-  //     console.log('User signed up!');
-  //   } catch (error) {
-  //     console.error('Signup error:', error.message);
-  //   }
-  // };
 
 
   return (

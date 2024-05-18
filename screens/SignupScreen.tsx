@@ -2,16 +2,21 @@ import React, { useState } from 'react';
 import { View, Text, Image, TextInput, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient'; 
 import { useNavigation, NavigationProp } from '@react-navigation/native';
-import firebase from 'firebase/app';
 import 'firebase/database';
 import { getDatabase, push, ref } from "firebase/database";
 
 
-import Animated from 'react-native-reanimated';
 import Button from '../Components/button'; // Import the Button component
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from 'firebase/analytics';
 
+
+interface User {
+  name: string;
+  age: string;
+  sex: string;
+  email: string;
+  password: string;
+}
 const firebaseConfig = {
   apiKey: "AIzaSyDUy3erGoFd2Sdj-wusnc9ExkFea99CNL8",
   authDomain: "postureguard.firebaseapp.com",
@@ -37,6 +42,22 @@ const SignupScreen: React.FC = () => {
     setTab(newTab);
   };
 
+  const [name, setName] = useState<string>('');
+  const [age, setAge] = useState<string>('');
+  const [sex, setSex] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+
+  const handleSignupPress = () => {
+    const newUser: User = {
+      name,
+      age,
+      sex,
+      email,
+      password
+    };
+
+
   const handleLoginLinkPress = () => {
     handleTabChange('login');
   };
@@ -45,14 +66,7 @@ const SignupScreen: React.FC = () => {
     handleTabChange('signup');
   };
 
-  const handleSignupPress = () => {
-    const newUser = {
-      name: '', 
-      age: '', 
-      sex: '', 
-      email: '', 
-      password: '', 
-    };
+
 
     const usersRef = ref(database, 'users');
     push(usersRef, newUser)
@@ -71,15 +85,17 @@ const SignupScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <LinearGradient
-        colors={['rgba(175, 165, 143, 0.55)', 'rgba(175, 165, 143, 0.50)']}
-        style={styles.linearGradient}
-        start={{ x: 0.5, y: 0 }}
-        end={{ x: 0.5, y: 1 }}
+        colors={['rgba(175, 165, 143, 0.55)', 'rgba(175, 165, 143, 0.50)']} // Specify colors for the gradient
+        style={styles.linearGradient} // Apply the gradient style
+        start={{ x: 0.5, y: 0 }} // Set start point for vertical gradient
+        end={{ x: 0.5, y: 1 }}   // Set end point for vertical gradient
       >
-        <View>
+        {/* top Illustration */}
+        <View >
           <Image source={require('./assets/images/registrationTopEclipse.png')} />
         </View>
         <View style={styles.registrationCenterBox}>
+          {/* Tabs */}
           <View style={styles.tabsContainer}>
             <TouchableOpacity
               style={[styles.tab, tab === 'login' ? styles.activeTab : null]}
@@ -91,10 +107,27 @@ const SignupScreen: React.FC = () => {
               onPress={() => handleTabChange('signup')}>
               <Text style={styles.tabText}>Signup</Text>
             </TouchableOpacity>
+            {/* <Animated.View
+              style={{
+                position: 'absolute',
+                left: tab === 'login' ? 0 : '50%', // Set initial value based on tab state
+                bottom: 0,
+                width: '50%',
+                transform: [
+                  {
+                    translateX: tab === 'login' ? 0 : 0.5,
+                  },
+                  {
+                    translateX: tab === 'login' ? 0 : 0.5,
+                  },
+                ],
+              }}
+            /> */}
           </View>
+          {/* Loginform */}
           {tab === 'login' && (
             <View style={styles.loginForm}>
-              <View>
+              <View >
                 <Text style={styles.label}>Email</Text>
                 <TextInput placeholder="Email" style={styles.input} keyboardType="email-address" />
               </View>
@@ -104,6 +137,8 @@ const SignupScreen: React.FC = () => {
               </View>
             </View>
           )}
+
+          {/* Adding a Login Button */}
           {tab === 'login' && (
             <Button
               title="Log In"
@@ -112,25 +147,29 @@ const SignupScreen: React.FC = () => {
               textStyle={styles.loginButtonText}
             />
           )}
+
+          {/* Create new account? SignUp */}
           {tab === 'login' && (
             <View style={styles.signupLinkContainer}>
               <Text style={styles.createText}>Create new account?</Text>
-              <TouchableOpacity onPress={handleSignupLinkPress}>
+              <TouchableOpacity onPress={handleSignupPress}>
                 <Text style={styles.signupText}>SignUp</Text>
               </TouchableOpacity>
             </View>
           )}
+
+          {/* Signup form */}
           {tab === 'signup' && (
             <ScrollView style={styles.signupForm}>
-              <View>
+              <View >
                 <Text style={styles.label}>Name</Text>
                 <TextInput placeholder="Name" style={styles.input} />
               </View>
-              <View>
+              <View >
                 <Text style={styles.label}>Age</Text>
                 <TextInput placeholder="Age" style={styles.input} keyboardType="numeric" />
               </View>
-              <View>
+              <View >
                 <Text style={styles.label}>Sex</Text>
                 <TextInput placeholder="Sex" style={styles.input} />
               </View>
@@ -159,14 +198,13 @@ const SignupScreen: React.FC = () => {
           {tab === 'signup' && (
             <View style={styles.loginLinkContainer}>
               <Text style={styles.alreadyText}>Already have an account?</Text>
-              <TouchableOpacity onPress={handleLoginLinkPress}>
+              <TouchableOpacity onPress={handleLoginPress}>
                 <Text style={styles.loginText}>LogIn</Text>
               </TouchableOpacity>
             </View>
           )}
         </View>
-        <Image source={require('./assets/images/registrationIllustration.png')}
-        style={styles.illustartion} />
+        <Image source={require('./assets/images/registrationIllustration.png')} />
       </LinearGradient>
     </View>
   );
@@ -186,9 +224,7 @@ const styles = StyleSheet.create({
     padding: 20,
     height: '50%',
   },
-  illustartion:{
-    position: 'absolute',
-  },
+
   signupButton: {
     backgroundColor: '#125488',
     paddingHorizontal: 5,

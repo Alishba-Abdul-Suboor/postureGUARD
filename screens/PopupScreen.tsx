@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     color:'#ffffff',
   },
   closeButton: {
-    height: 30,
+    height: 40,
     top: 5,
     },
   screen: {
