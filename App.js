@@ -2,16 +2,16 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import 'react-native-gesture-handler';
-import { initializeApp } from "firebase/app";
-import 'firebase/database';
+
 
 
 
 import SplashScreen from './screens/SplashScreen';
 import PopupScreen from './screens/PopupScreen';
 import SignupScreen from './screens/SignupScreen';
-import ProfileScreen from './screens/ProfilingScreen';
-import FacetrackingScreen from './screens/FacetrackingScreen';
+import LoginScreen from './screens/LoginScreen';
+// import ProfileScreen from './screens/ProfilingScreen';
+// import FacetrackingScreen from './screens/FacetrackingScreen';
 import DashboardScreen from './screens/DashboardScreen';
 import BindingScreen1 from './screens/BindingScreen1';
 import BindingScreen2 from './screens/BindingScreen2';
@@ -35,21 +35,6 @@ import ShoulderExercise3Screen from './screens/ShoulderExercise3Screen';
 
 const Stack = createStackNavigator();
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDUy3erGoFd2Sdj-wusnc9ExkFea99CNL8",
-  authDomain: "postureguard.firebaseapp.com",
-  databaseURL: "https://postureguard-default-rtdb.firebaseio.com",
-  projectId: "postureguard",
-  storageBucket: "postureguard.appspot.com",
-  messagingSenderId: "121148095939",
-  appId: "1:121148095939:web:5d6d31d0a6ec2256371176",
-  measurementId: "G-6CZDZZ7CCN"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-
-
 const App = () => {
 
 
@@ -60,8 +45,9 @@ const App = () => {
         <Stack.Screen name="SplashScreen" component={SplashScreen} />
         <Stack.Screen name="PopupScreen" component={PopupScreen} />
         <Stack.Screen name="SignupScreen" component={SignupScreen} />
-        <Stack.Screen name="ProfilingScreen" component={ProfileScreen} />
-        <Stack.Screen name="FacetrackingScreen" component={FacetrackingScreen} />
+        <Stack.Screen name="LoginScreen" component={LoginScreen} />
+        {/* <Stack.Screen name="ProfilingScreen" component={ProfileScreen} /> */}
+        {/* <Stack.Screen name="FacetrackingScreen" component={FacetrackingScreen} /> */}
         <Stack.Screen name="DashboardScreen" component={DashboardScreen} />
         <Stack.Screen name="BindingScreen1" component={BindingScreen1} />
         <Stack.Screen name="BindingScreen2" component={BindingScreen2} />

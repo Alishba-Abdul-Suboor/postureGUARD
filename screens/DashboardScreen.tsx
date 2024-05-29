@@ -13,101 +13,86 @@ const DashboardScreen: React.FC<DashboardScreenProps> = () => {
     const handleBindCamPress = () => {
         navigation.navigate('BindingScreen1'); // Navigate to ProfilingScreen when signup button is pressed
       };
-      const handleSetGoalPress = () => {
-        navigation.navigate('SetgoalScreen'); // Navigate to ProfilingScreen when signup button is pressed
-      };
+
     return (
-   <View style={styles.container}>
-     <View style={styles.backgroundSection}>
-      {/* Background Image */}
-      <Image
-        source={require('./assets/images/dashboardTopSection.png')}
-        style={styles.backgroundImage}
-      />
-      </View>
-      <View style={styles.dashboardSettings}>
-      <View style={styles.header}>
+      <View style={styles.container}>
+        {/* User Account Details Section */}
+        <View style={styles.header}>
         <Text style={styles.headerText}>
           <Text style={styles.postureText}>Posture</Text>
           <Text style={styles.guardText}>Guard</Text>
         </Text>
       </View>
-      {/* User and Camera Info */}
-      <View style={styles.userInfoContainer}>
-        {/* User Info Section */}
-        <View style={styles.userInfo}>
-          {/* Display user information here */}
-          <Text>User Info</Text>
+          <View style={styles.userDetailsHighlight}>
+          <View style={styles.userCard}>
+            <View style={styles.userDetailsContainer}>
+            <Text style={styles.userInfoText}>User Name</Text>
+            <Text style={styles.userInfoText}>Age: XX</Text>
+            <Text style={styles.userInfoText}>Sex: XX</Text>
+            </View>
+            <Image
+            source={require('./assets/images/barbell.png')}
+            style={styles.profileImage}
+          />
+          </View>
+          
         </View>
-
-        {/* Camera Info Section */}
-        <View style={styles.cameraInfo}>
-          {/* Display camera information here */}
-          <Text>Camera Info</Text>
-        </View>
+        {/* Cards Section */}
+        <ScrollView contentContainerStyle={styles.cardsContainer}>
+          {/* Camera Connection Card */}
+          <View style={styles.card}>
+            <Text style={styles.cardTitle}>Camera Connection</Text>
+            <Image
+              source={require('./assets/images/triangle.png')}
+              style={styles.cardIcon}
+            />
+             <Button 
+              title="Bind Camera" 
+              onPress={handleBindCamPress} 
+              buttonStyle={styles.buttonStyle} 
+              textStyle={styles.buttonText}
+            />
+          </View>
+          {/* Score Graph Card */}
+          <View style={styles.card}>
+            <Text style={styles.cardTitle}>Score Graph</Text>
+            <Image
+              source={require('./assets/images/triangle.png')}
+              style={styles.cardIcon}
+            />
+          </View>
+          {/* Monitoring Card */}
+          <View style={styles.card}>
+            <Text style={styles.cardTitle}>Monitoring</Text>
+            <Image
+              source={require('./assets/images/triangle.png')}
+              style={styles.cardIcon}
+            />
+           
+          </View>
+        </ScrollView>
+        {/* Bottom Menu */}
+        <BottomMenu />
       </View>
-      <View style={styles.monitoringCard}>
-          {/* Display camera information here */}
-          <Text>Monitoring</Text>
-          <Button title="Bind Camera"
-              onPress={handleBindCamPress}
-              buttonStyle={styles.buttonStyle}
-              textStyle={styles.buttonText}/>
-        </View>
-      
-
-      {/* Dashboard Settings */}
-      <ScrollView contentContainerStyle={styles.scrollingFrame}>
-        {/* Each setting represented as a card */}
-        <View style={styles.card}>
-        
-        </View>
-        <View style={styles.card}>
-          <Text>Dashboard Setting 2</Text>
-        </View>
-        {/* Add more settings as needed */}
-      </ScrollView>
-      </View>
-      <BottomMenu />
-    </View>
-  );
+    );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'rgba(175, 165, 143, 0.55)',
     alignItems: 'center',
-    justifyContent: 'center',
- 
-  },
-  backgroundImage: {
-    resizeMode: 'cover',
-    height: '100%',
     
-  },
-  scrollingFrame:{
-  
-    alignItems: 'center',
-    width: '100%',
-    
-  },
-
-  monitoringCard: {
-    marginBottom: 20,
-    backgroundColor: '#E0E0E0', // Card background color
-    width: '80%',
-    borderRadius: 10,
-    padding: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   header: {
     alignItems: 'center',
-    // paddingTop: 40,
-    // paddingBottom: 20,
+    width: '100%',
+    height: '10%',
+    backgroundColor: 'rgba(175, 165, 143, 0.55)',
   },
   headerText: {
     fontSize: 24,
+    top: 20,
     fontWeight: 'bold',
     color: '#2E86C1', // Color for "Posture"
   },
@@ -117,44 +102,59 @@ const styles = StyleSheet.create({
   guardText: {
     color: '#58D68D', // Color for "Guard"
   },
-  userInfoContainer: {
+  userDetailsContainer: {
+    flexDirection: 'column',
+    alignItems: 'center',
+   
+    
+  },
+  userCard:{
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 5,
+  },
+  userDetailsHighlight: {
     padding: 20,
-  },
-  userInfo: {
-    flex: 1,
-    marginRight: 10,
-    backgroundColor: 'rgba(255, 255, 255, 0.5)', // Semi-transparent white background
-    borderRadius: 10,
-    padding: 10,
-  },
-  cameraInfo: {
-    flex: 1,
-    marginLeft: 10,
-    backgroundColor: 'rgba(255, 255, 255, 0.5)', // Semi-transparent white background
-    borderRadius: 10,
-    padding: 10,
-  },
-  dashboardSettings: {
-    flex: 1,
-    backgroundColor: 'transparent', // Plain screen color
     width: '100%',
-    justifyContent: 'center',
-  alignItems: 'center',
+    backgroundColor: 'rgba(173, 217, 216, 0.4)',
   },
-  backgroundSection:{
-    flex: 1,
-    backgroundColor: '#EAF0F2',
-    width: '100%',
+ 
+  userInfoText: {
+    fontSize: 16,
+    marginBottom: 5,
+    color: '#2E86C1',
+    paddingLeft: 20,
+  },
+  profileImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    borderColor: '#2E86C1',
+    borderWidth: 1,
+    marginLeft: 100,
+  },
+  cardsContainer: {
+    alignItems: 'center',
+    bottom: 10,
   },
   card: {
-    marginBottom: 20,
-    backgroundColor: '#E0E0E0', // Card background color
+    backgroundColor: 'rgba(175, 165, 143, 0.25)',
     borderRadius: 10,
     padding: 20,
-    alignItems: 'center',
+    marginBottom: 20,
     width: '100%',
+    alignItems: 'center',
+  },
+  cardTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    color: '#2E86C1',
+  },
+  cardIcon: {
+    width: 50,
+    height: 50,
+    marginBottom: 10,
   },
   buttonText: {
     color: 'white',
@@ -169,9 +169,4 @@ const styles = StyleSheet.create({
   },
 });
   
- 
-
-
-
 export default DashboardScreen;
-
